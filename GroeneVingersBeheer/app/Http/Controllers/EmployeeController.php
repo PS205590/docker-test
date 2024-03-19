@@ -14,7 +14,7 @@ class EmployeeController extends Controller
     public function index(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         $employees = Employee::all();
-        return view('employees.index', compact('employees'));
+        return view('management.index', compact('employees'));
     }
 
     /**
@@ -34,7 +34,7 @@ class EmployeeController extends Controller
             'position' => 'required|string|max:255',
         ]);
         Employee::create($request->all());
-        return redirect()->route('employees.index')
+        return redirect()->route('management.index')
             ->with('success', 'Post created successfully.');
     }
 
@@ -57,7 +57,7 @@ class EmployeeController extends Controller
         ]);
         $employees = Employee::find($id);
         $employees->update($request->all());
-        return redirect()->route('employees.index')
+        return redirect()->route('management.index')
             ->with('success', 'Employee updated successfully.');
     }
 
@@ -71,7 +71,7 @@ class EmployeeController extends Controller
     {
         $employees = Employee::find($id);
         $employees->delete();
-        return redirect()->route('employees.index')
+        return redirect()->route('management.index')
             ->with('success', 'Order deleted successfully');
     }
     // routes functions
@@ -83,7 +83,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('employees.create');
+        return view('management.create');
     }
 
     /**
@@ -95,7 +95,7 @@ class EmployeeController extends Controller
     public function show($id)
     {
         $employees = Employee::find($id);
-        return view('employees.show', compact('employees'));
+        return view('management.show', compact('employees'));
     }
 
     /**
@@ -107,6 +107,6 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         $employee = Employee::find($id);
-        return view('employees.edit', compact('employee'));
+        return view('management.edit', compact('employee'));
     }
 }

@@ -11,10 +11,10 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-warning">
     <div class="container-fluid">
-        <a class="navbar-brand h1" href={{ route('employees.index') }}>CRUDPosts</a>
+        <a class="navbar-brand h1" href={{ route('management.index') }}>GroeneVingers</a>
         <div class="justify-end ">
             <div class="col ">
-                <a class="btn btn-sm btn-success" href={{ route('employees.create') }}>Add Post</a>
+                <a class="btn btn-sm btn-success" href={{ route('management.create') }}>Add Employee</a>
             </div>
         </div>
     </div>
@@ -45,8 +45,8 @@
 
 
                 <td>
-                    <a href="{{ route('employees.edit', $employee->employee_id) }}" class="btn btn-primary btn-sm">Edit</a>
-                    <form action="{{ route('employees.destroy', $employee->employee_id) }}" method="post" style="display: inline;">
+                    <a href="{{ route('management.edit', $employee->employee_id) }}" class="btn btn-primary btn-sm">Edit</a>
+                    <form action="{{ route('management.destroy', $employee->employee_id) }}" method="post" style="display: inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>

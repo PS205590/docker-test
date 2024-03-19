@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\LoginRegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,17 +15,29 @@ use App\Http\Controllers\EmployeeController;
 |
 */
 
+
+Route::post('/login', [LoginRegisterController::class, 'authenticate'])->name('login');
+
+Route::controller(LoginRegisterController::class)->group(function() {
+    Route::get('/register', 'register')->name('register');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/', 'login')->name('login');
+    Route::post('/authenticate', 'authenticate')->name('authenticate');
+    Route::get('/dashboard', 'dashboard')->name('dashboard');
+    Route::post('/logout', 'logout')->name('logout');
+});
+
 // returns the home page with all posts
-Route::get('/', EmployeeController::class .'@index')->name('employees.index');
+//Route::get('/', EmployeeController::class .'@index')->name('management.index');
 // returns the form for adding a post
-Route::get('/employees/create', EmployeeController::class . '@create')->name('employees.create');
+Route::get('/management/create', EmployeeController::class . '@create')->name('management.create');
 // adds a post to the database
-Route::post('/employees', EmployeeController::class .'@store')->name('employees.store');
+Route::post('/management', EmployeeController::class .'@store')->name('management.store');
 // returns a page that shows a full post
-Route::get('/employees/{employee}', EmployeeController::class .'@show')->name('employees.show');
+Route::get('/management/{employee}', EmployeeController::class .'@show')->name('management.show');
 // returns the form for editing a post
-Route::get('/employees/{employee}/edit', EmployeeController::class .'@edit')->name('employees.edit');
+Route::get('/management/{employee}/edit', EmployeeController::class .'@edit')->name('management.edit');
 // updates a post
-Route::put('/employees/{employee}', EmployeeController::class .'@update')->name('employees.update');
+Route::put('/management/{employee}', EmployeeController::class .'@update')->name('management.update');
 // deletes a post
-Route::delete('/employees/{employee}', EmployeeController::class .'@destroy')->name('employees.destroy');
+Route::delete('/management/{employee}', EmployeeController::class .'@destroy')->name('management.destroy');

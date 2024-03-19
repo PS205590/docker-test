@@ -11,10 +11,10 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-warning">
         <div class="container-fluid">
-            <a class="navbar-brand h1" href={{ route('employees.index') }}>CRUDPosts</a>
+            <a class="navbar-brand h1" href={{ route('management.index') }}>GroeneVingers</a>
             <div class="justify-end ">
                 <div class="col ">
-                    <a class="btn btn-sm btn-success" href={{ route('employees.create') }}>Add Post</a>
+                    <a class="btn btn-sm btn-success" href={{ route('management.create') }}>Add Post</a>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
         <div class="row h-100 justify-content-center align-items-center">
             <div class="col-10 col-md-8 col-lg-6">
                 <h3>Update Order</h3>
-                <form action="{{ route('employees.update', $employee->employee_id) }}" method="post">
+                <form action="{{ route('management.update', $employee->employee_id) }}" method="post">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
