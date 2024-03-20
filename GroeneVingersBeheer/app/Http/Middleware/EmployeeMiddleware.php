@@ -13,12 +13,14 @@ class EmployeeMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
-        if (auth()->check() && auth()->user()->isEmployee()) {
+        // Check if the authenticated user is an admin
+        if ($request->user() && $request->user()->role_id === 2) {
             return $next($request);
         }
 
-        return redirect('/login');
+        // If not an admin, redirect to login or handle unauthorized access
+        return redirect('/'); // or any other response, such as abort(403)
     }
 }

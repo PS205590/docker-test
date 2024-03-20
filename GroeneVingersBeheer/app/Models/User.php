@@ -33,6 +33,8 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $appends = ['role_user'];
+
     /**
      * The attributes that should be cast.
      *
@@ -45,7 +47,7 @@ class User extends Authenticatable
 
     public function roles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class, 'users', 'role_id', 'role_id');
     }
 
     /**
@@ -54,9 +56,7 @@ class User extends Authenticatable
      * @param  string  $role
      * @return bool
      */
-    public function hasRole(string $role): bool
-    {
-        return $this->roles->contains('name', $role);
-    }
+
+
 
 }

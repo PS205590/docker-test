@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\UserdataController;
 use App\Http\Controllers\LoginRegisterController;
 
 /*
@@ -15,9 +16,6 @@ use App\Http\Controllers\LoginRegisterController;
 |
 */
 
-
-Route::post('/login', [LoginRegisterController::class, 'authenticate'])->name('login');
-
 Route::controller(LoginRegisterController::class)->group(function() {
     Route::get('/register', 'register')->name('register');
     Route::post('/store', 'store')->name('store');
@@ -27,17 +25,18 @@ Route::controller(LoginRegisterController::class)->group(function() {
     Route::post('/logout', 'logout')->name('logout');
 });
 
-// returns the home page with all posts
-//Route::get('/', EmployeeController::class .'@index')->name('management.index');
-// returns the form for adding a post
-Route::get('/management/create', EmployeeController::class . '@create')->name('management.create');
-// adds a post to the database
-Route::post('/management', EmployeeController::class .'@store')->name('management.store');
-// returns a page that shows a full post
-Route::get('/management/{employee}', EmployeeController::class .'@show')->name('management.show');
-// returns the form for editing a post
-Route::get('/management/{employee}/edit', EmployeeController::class .'@edit')->name('management.edit');
-// updates a post
-Route::put('/management/{employee}', EmployeeController::class .'@update')->name('management.update');
-// deletes a post
-Route::delete('/management/{employee}', EmployeeController::class .'@destroy')->name('management.destroy');
+Route::middleware(['auth', AdminMiddleware::class])->group(function () {
+    // Routes accessible only to admins
+    Route::get('/management', [UserdataController::class, 'index'])->name('management.index');
+    Route::get('/management/create', [UserdataController::class, 'create'])->name('management.create');
+    Route::post('/management', [UserdataController::class, 'store'])->name('management.store');
+    Route::get('/management/{employee}', [UserdataController::class, 'show'])->name('management.show');
+    Route::get('/management/{employee}/edit', [UserdataController::class, 'edit'])->name('management.edit');
+    Route::put('/management/{employee}', [UserdataController::class, 'update'])->name('management.update');
+    Route::delete('/management/{employee}', [UserdataController::class, 'destroy'])->name('management.destroy');
+});
+
+Route::middleware(['auth', \App\Http\Middleware\EmployeeMiddleware::class])->group(function () {
+
+    Route::get('/employee', [\App\Http\Controllers\EmployeeController::class, 'index'])->name('employee.welcome');
+});
