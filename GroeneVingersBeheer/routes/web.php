@@ -39,4 +39,6 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
 Route::middleware(['auth', \App\Http\Middleware\EmployeeMiddleware::class])->group(function () {
 
     Route::get('/employee', [\App\Http\Controllers\EmployeeController::class, 'index'])->name('employee.welcome');
+    Route::get('/employee', [\App\Http\Controllers\CalendarController::class, '__invoke'])->name('employee.welcome');
+
 });
