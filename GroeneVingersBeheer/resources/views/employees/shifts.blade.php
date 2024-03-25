@@ -23,7 +23,7 @@
                         themeSystem: 'bootstrap5',
 
 
-                        events: @json($appointments),
+                        events: @json($data),
                     });
                     calendar.render();
                 });

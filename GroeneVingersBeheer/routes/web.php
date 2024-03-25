@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserdataController;
@@ -38,7 +40,11 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
 
 Route::middleware(['auth', \App\Http\Middleware\EmployeeMiddleware::class])->group(function () {
 
-    Route::get('/employee', [\App\Http\Controllers\EmployeeController::class, 'index'])->name('employee.welcome');
-    Route::get('/employee', [\App\Http\Controllers\CalendarController::class, '__invoke'])->name('employee.calendar');
+
+    Route::get('/welcome', [EmployeeController::class, 'index'])->name('employee.welcome');
+    Route::get('/employee', [EmployeeController::class, 'index'])->name('employee.calendar');
+
+    Route::get('/welcome', [CalendarController::class, 'welcome'])->name('employee.welcome');
+    Route::get('/employee', [CalendarController::class, 'shifts'])->name('employee.shifts');
 
 });

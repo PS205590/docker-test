@@ -5,7 +5,7 @@
         <li class="list-group-item" >admin</li>
         @elseif (Auth::check() && Auth::user()->roles->contains(2))
         <li class="list-group-item"><a href="{{ route('employee.welcome') }}">Home</a></li>
-        <li class="list-group-item"><a href="{{ route('employee.welcome') }}">Shifts</a></li>
+        <li class="list-group-item"><a href="{{ route('employee.shifts') }}">Shifts</a></li>
 
 
         @endif
