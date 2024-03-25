@@ -1,4 +1,4 @@
-@extends('auth.layouts')
+@extends('layouts.layout')
 
 @section('content')
 
@@ -16,6 +16,8 @@
                             You are logged in!
                         </div>
                     @endif
+
+
                 </div>
             </div>
         </div>

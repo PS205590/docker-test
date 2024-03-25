@@ -50,6 +50,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'users', 'role_id', 'role_id');
     }
 
+    public function calendarEvents(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Appointment::class);
+    }
+
     /**
      * Check if the user has a specific role.
      *

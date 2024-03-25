@@ -103,7 +103,7 @@ class LoginRegisterController extends Controller
     /**
      * Display a dashboard to authenticated users.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function dashboard()
     {
