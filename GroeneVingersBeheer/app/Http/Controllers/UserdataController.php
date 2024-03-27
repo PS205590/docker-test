@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\Employee;
 class UserdataController extends Controller
 {
     /**
@@ -13,8 +13,8 @@ class UserdataController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $employees = Employee::all();
-        return view('management.index', compact('employees'));
+        $users = User::all();
+        return view('management.index', compact('users'));
     }
 
     /**
@@ -27,13 +27,14 @@ class UserdataController extends Controller
     {
         $this->validate($request, [
 
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
+            'id' => 'required|int',
+            'name' => 'required|string|max:255',
             'email' => 'required|string|max:255',
-            'phone_number' => 'required|string|max:255',
-            'position' => 'required|string|max:255',
+            'password' => 'required|string|max:255',
+            'role_id' => 'required|int',
+
         ]);
-        Employee::create($request->all());
+        User::create($request->all());
         return redirect()->route('management.index')
             ->with('success', 'Post created successfully.');
     }
@@ -48,15 +49,15 @@ class UserdataController extends Controller
     public function update(Request $request, $id): \Illuminate\Http\RedirectResponse
     {
         $this->validate($request, [
-            'employee_id' => 'required|numeric', // Assuming order_number is numeric
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
+
+            'id' => 'required|int',
+            'name' => 'required|string|max:255',
             'email' => 'required|string|max:255',
-            'phone_number' => 'required|string|max:255',
-            'position' => 'required|string|max:255',
+            'password' => 'required|string|max:255',
+            'role_id' => 'required|int',
         ]);
-        $employees = Employee::find($id);
-        $employees->update($request->all());
+        $users = User::find($id);
+        $users->update($request->all());
         return redirect()->route('management.index')
             ->with('success', 'Employee updated successfully.');
     }
@@ -69,8 +70,8 @@ class UserdataController extends Controller
      */
     public function destroy($id)
     {
-        $employees = Employee::find($id);
-        $employees->delete();
+        $users = User::find($id);
+        $users->delete();
         return redirect()->route('management.index')
             ->with('success', 'Order deleted successfully');
     }
@@ -94,19 +95,19 @@ class UserdataController extends Controller
      */
     public function show($id)
     {
-        $employees = Employee::find($id);
-        return view('management.show', compact('employees'));
+        $users = User::find($id);
+        return view('management.show', compact('users'));
     }
 
     /**
      * Show the form for editing the specified post.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
     public function edit($id)
     {
-        $employee = Employee::find($id);
-        return view('management.edit', compact('employee'));
+        $users = User::find($id);
+        return view('management.edit', compact('users'));
     }
 }

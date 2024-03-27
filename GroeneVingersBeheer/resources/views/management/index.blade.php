@@ -24,20 +24,19 @@
             </tr>
             </thead>
             <tbody>
-            @foreach ($employees as $employee)
+            @foreach ($users as $user)
                 <tr>
 
-                    <td>{{ $employee->employee_id }}</td>
-                    <td>{{ $employee->first_name}}</td>
-                    <td>{{ $employee->last_name}}</td>
-                    <td>{{ $employee->email}}</td>
-                    <td>{{ $employee->phone_number}}</td>
-                    <td>{{ $employee->position}}</td>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->first_name}}</td>
+                    <td>{{ $user->last_name}}</td>
+                    <td>{{ $user->email}}</td>
+
 
 
                     <td>
-                        <a href="{{ route('management.edit', $employee->employee_id) }}" class="btn btn-primary btn-sm">Edit</a>
-                        <form action="{{ route('management.destroy', $employee->employee_id) }}" method="post"
+                        <a href="{{ route('management.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                        <form action="{{ route('management.destroy', $user->id) }}" method="post"
                               style="display: inline;">
                             @csrf
                             @method('DELETE')
@@ -49,5 +48,8 @@
             </tbody>
         </table>
     </div>
+
+
+
 
 @endsection
