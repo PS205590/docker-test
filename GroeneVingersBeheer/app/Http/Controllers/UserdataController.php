@@ -44,22 +44,21 @@ class UserdataController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id): \Illuminate\Http\RedirectResponse
+    public function update(Request $request, User $employee)
     {
-        $this->validate($request, [
-
-            'id' => 'required|int',
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|max:255',
-            'password' => 'required|string|max:255',
-            'role_id' => 'required|int',
+        $validatedData = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone_number' => 'required|string|max:20',
+            'position' => 'required|string|max:255',
         ]);
-        $users = User::find($id);
-        $users->update($request->all());
-        return redirect()->route('management.index')
-            ->with('success', 'Employee updated successfully.');
+
+        $employee->update($validatedData);
+
+        return redirect()->route('management.index')->with('success', 'Employee updated successfully.');
     }
 
     /**

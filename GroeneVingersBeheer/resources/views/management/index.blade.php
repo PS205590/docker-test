@@ -1,16 +1,17 @@
 @extends('layouts.layout')
 
-
 @section('content')
     <div class="container-fluid">
         <a class="navbar-brand h1" href={{ route('management.index') }}>GroeneVingers</a>
         <div class="justify-end ">
             <div class="col ">
-                <a class="btn btn-sm btn-success" href={{ route('management.create') }}>Add Employee</a>
+                <button class="btn btn-sm btn-success" id="myBtn" >Add Employee</button>
             </div>
         </div>
     </div>
 
+
+    </div>
     <div class="container mt-5">
         <table class="table">
             <thead>
@@ -19,8 +20,7 @@
                 <th>first name</th>
                 <th>last name</th>
                 <th>email</th>
-                <th>phone number</th>
-                <th>position</th>
+
             </tr>
             </thead>
             <tbody>
@@ -49,7 +49,41 @@
         </table>
     </div>
 
+    <div id="myModal" class="modal">
 
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="col-10 col-md-8 col-lg-6">
+                <h3>Add a Post</h3>
+                <form action="{{ route('management.store') }}" method="post">
+                    @csrf
+                    <!-- Hidden inputs for 'id' and 'role_id' -->
+                    <input type="hidden" name="id" value="1"> <!-- Assuming 'id' is predefined or auto-generated -->
+                    <input type="hidden" name="role_id" value="1"> <!-- Assuming 'role_id' is predefined -->
+
+                    <!-- Name field -->
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+
+                    <!-- Email field -->
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+
+                    <!-- Password field -->
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
 
 
 @endsection

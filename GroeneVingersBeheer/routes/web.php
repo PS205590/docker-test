@@ -30,9 +30,8 @@ Route::controller(LoginRegisterController::class)->group(function() {
 Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     // Routes accessible only to admins
     Route::get('/management', [UserdataController::class, 'index'])->name('management.index');
-    Route::get('/management/create', [UserdataController::class, 'create'])->name('management.create');
     Route::post('/management', [UserdataController::class, 'store'])->name('management.store');
-    Route::get('/management/{employee}', [UserdataController::class, 'show'])->name('management.show');
+    Route::get('/management/{employee}', [UserdataController::class, 'show'])->name('management.show'); // Define the route to show user data
     Route::get('/management/{employee}/edit', [UserdataController::class, 'edit'])->name('management.edit');
     Route::put('/management/{employee}', [UserdataController::class, 'update'])->name('management.update');
     Route::delete('/management/{employee}', [UserdataController::class, 'destroy'])->name('management.destroy');
