@@ -12,6 +12,7 @@ class Appointment extends Model
         'finish_time',
         'comments',
         'employee_id',
+        'type_id',
     ];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo

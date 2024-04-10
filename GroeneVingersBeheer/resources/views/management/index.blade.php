@@ -11,7 +11,7 @@
     </div>
 
 
-    </div>
+
     <div class="container mt-5">
         <table class="table">
             <thead>
@@ -65,6 +65,12 @@
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+
+                    <!-- Id field -->
+                    <div class="form-group">
+                        <label for="id">Id</label>
+                        <input type="text" class="form-control" id="id" name="id" required>
                     </div>
 
                     <!-- Email field -->

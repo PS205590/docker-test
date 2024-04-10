@@ -6,6 +6,8 @@ use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserdataController;
 use App\Http\Controllers\LoginRegisterController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\AbsenceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +37,9 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::get('/management/{employee}/edit', [UserdataController::class, 'edit'])->name('management.edit');
     Route::put('/management/{employee}', [UserdataController::class, 'update'])->name('management.update');
     Route::delete('/management/{employee}', [UserdataController::class, 'destroy'])->name('management.destroy');
+    Route::get('/inventory', [InventoryController::class, 'index'])->name('management.inventory');
+
+
 });
 
 Route::middleware(['auth', \App\Http\Middleware\EmployeeMiddleware::class])->group(function () {
@@ -46,4 +51,6 @@ Route::middleware(['auth', \App\Http\Middleware\EmployeeMiddleware::class])->gro
     Route::get('/welcome', [CalendarController::class, 'welcome'])->name('employee.welcome');
     Route::get('/employee', [CalendarController::class, 'shifts'])->name('employee.shifts');
 
+    Route::get('/absence', [AbsenceController::class, 'index'])->name('employee.absence');
+    Route::post('/absence', [AbsenceController::class, 'store'])->name('absence.store');
 });

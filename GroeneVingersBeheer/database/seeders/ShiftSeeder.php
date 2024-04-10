@@ -22,12 +22,14 @@ class ShiftSeeder extends Seeder
             'finish_time' => '2024-03-20 17:00:00',
             'comments' => $this->generateComments(), // Generate random comments
             'user_id' => '1',
+            'type_id' => '1'
         ]);
         Appointment::create([
             'start_time' => '2024-03-20 09:00:00',
             'finish_time' => '2024-03-20 17:00:00',
             'comments' => $this->generateComments(), // Generate random comments
             'user_id' => '2',
+            'type_id' => '1'
         ]);
     }
 
