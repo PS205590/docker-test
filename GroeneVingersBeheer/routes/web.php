@@ -8,6 +8,7 @@ use App\Http\Controllers\UserdataController;
 use App\Http\Controllers\LoginRegisterController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\AbsenceController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,4 +54,8 @@ Route::middleware(['auth', \App\Http\Middleware\EmployeeMiddleware::class])->gro
 
     Route::get('/absence', [AbsenceController::class, 'index'])->name('employee.absence');
     Route::post('/absence', [AbsenceController::class, 'store'])->name('absence.store');
+
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('employee.checkout');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+
 });

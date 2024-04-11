@@ -8,6 +8,7 @@
             <li class="list-group-item"><a href="{{ route('employee.welcome') }}">Home</a></li>
             <li class="list-group-item"><a href="{{ route('employee.shifts') }}">Shifts</a></li>
             <li class="list-group-item"><a href="{{ route('employee.absence') }}">Absence</a></li>
+            <li class="list-group-item"><a href="{{ route('employee.checkout') }}">Checkout</a></li>
 
 
         @endif
