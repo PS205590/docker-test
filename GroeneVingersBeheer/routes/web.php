@@ -45,7 +45,6 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
 
 Route::middleware(['auth', \App\Http\Middleware\EmployeeMiddleware::class])->group(function () {
 
-
     Route::get('/welcome', [EmployeeController::class, 'index'])->name('employee.welcome');
     Route::get('/employee', [EmployeeController::class, 'index'])->name('employee.calendar');
 
@@ -56,6 +55,11 @@ Route::middleware(['auth', \App\Http\Middleware\EmployeeMiddleware::class])->gro
     Route::post('/absence', [AbsenceController::class, 'store'])->name('absence.store');
 
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('employee.checkout');
+    Route::post('/generate-invoice', [CheckoutController::class, 'generateInvoice'])->name('generateInvoice');
     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+
+
+
+
 
 });

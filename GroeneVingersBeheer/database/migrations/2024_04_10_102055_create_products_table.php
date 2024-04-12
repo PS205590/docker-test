@@ -24,8 +24,6 @@ return new class extends Migration
             $table->integer('weight_gr');
             $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
-            $table->unsignedBigInteger('inventory_id')->nullable();
-            $table->foreign('inventory_id')->references('id')->on('inventory');
             $table->timestamps();
         });
     }
