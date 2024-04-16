@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "064b36382f5304bc5866c73e6dcca783",
+    "content-hash": "f86fd1a53b0af4ff7d46e285bd59e62f",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -2760,6 +2760,67 @@
                 }
             ],
             "time": "2023-11-12T21:59:55+00:00"
+        },
+        {
+            "name": "postcode-nl/api-client",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/postcode-nl/PostcodeNl_Api_Client.git",
+                "reference": "87805ef678bc2e544a17de942ea7256f3ce36eba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/postcode-nl/PostcodeNl_Api_Client/zipball/87805ef678bc2e544a17de942ea7256f3ce36eba",
+                "reference": "87805ef678bc2e544a17de942ea7256f3ce36eba",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=7.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PostcodeNl\\Api": "src/"
+                },
+                "classmap": [
+                    "src/PostcodeNl/Api/Client.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Postcode.nl B.V.",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A client to the Postcode.nl Address Api for international address validation. You will need to create an account at https://api.postcode.nl.",
+            "homepage": "https://api.postcode.nl",
+            "keywords": [
+                "Belgium",
+                "Luxembourg",
+                "address",
+                "api",
+                "austria",
+                "autocomplete",
+                "client",
+                "germany",
+                "netherlands",
+                "postcode",
+                "rest",
+                "switzerland"
+            ],
+            "support": {
+                "email": "tech@postcode.nl",
+                "issues": "https://github.com/postcode-nl/PostcodeNl_Api_Client/issues",
+                "source": "https://github.com/postcode-nl/PostcodeNl_Api_Client/tree/1.0.3",
+                "support": "https://github.com/postcode-nl/PostcodeNl_Api_Client"
+            },
+            "time": "2021-07-21T08:00:33+00:00"
         },
         {
             "name": "psr/clock",
@@ -8554,5 +8615,5 @@
         "php": "^8.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }

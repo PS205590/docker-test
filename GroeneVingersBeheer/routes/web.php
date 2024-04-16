@@ -9,6 +9,7 @@ use App\Http\Controllers\LoginRegisterController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ShiftController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +39,10 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::get('/management/{employee}/edit', [UserdataController::class, 'edit'])->name('management.edit');
     Route::put('/management/{employee}', [UserdataController::class, 'update'])->name('management.update');
     Route::delete('/management/{employee}', [UserdataController::class, 'destroy'])->name('management.destroy');
+
     Route::get('/inventory', [InventoryController::class, 'index'])->name('management.inventory');
+
+    Route::get('/shifts', [ShiftController::class, 'index'])->name('management.shifts');
 
 
 });

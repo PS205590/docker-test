@@ -18,7 +18,7 @@ class InventoryController extends Controller
         SyncInventoryJob::dispatch();
 
         // Retrieve the latest products from the database
-        $products = Product::all(); // Or use any other query to retrieve products
+        $products = Product::all();
 
         // Display inventory page with the latest data
         return view('management.inventory', compact('products'));
