@@ -18,6 +18,7 @@ return new class extends Migration
             $table->float('price');
             $table->string('image');
             $table->string('color');
+            $table->string('barcode')->nullable();
             $table->integer('height_cm');
             $table->integer('width_cm');
             $table->integer('depth_cm');

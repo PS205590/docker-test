@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
-    <h1>Inventory</h1>
+    <h1>Product information:</h1>
 
     <!-- Loading screen -->
     <div id="loading-screen" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
@@ -13,19 +13,24 @@
     <div id="inventory-content" style="display: none;">
         <table>
             <thead>
-                <tr>
-                    <th>Product</th>
-                </tr>
+            <tr>
+                <th>Product</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Image</th>
+                <!-- Add more columns as needed -->
+            </tr>
             </thead>
             <tbody>
-                @foreach ($products as $product)
-                    <tr>
-                        <td>
-                            <a style="text-decoration: none;" href="{{ route('management.product.show', ['id' => $product['id']]) }}">
-                                {{ $product['name'] }}
-                        </td>
-                    </tr>
-                @endforeach
+            @foreach ($products as $product)
+                <tr>
+                    <td>{{ $product['name'] }}</td>
+                    <td>{{ $product['description'] }}</td>
+                    <td>{{ $product['price'] }}</td>
+                    <td><img src="{{ $product['image'] }}" alt="{{ $product['name'] }}" style="max-width: 100px;"></td>
+                    <!-- Add more columns as needed -->
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>

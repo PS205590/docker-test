@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserdataController;
 use App\Http\Controllers\LoginRegisterController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ShiftController;
@@ -41,8 +42,10 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::delete('/management/{employee}', [UserdataController::class, 'destroy'])->name('management.destroy');
 
     Route::get('/inventory', [InventoryController::class, 'index'])->name('management.inventory');
+    // Get all products
+    Route::get('/product/{id}', [ProductController::class, 'show'])->name('management.product.show');
 
-    Route::get('/shifts', [ShiftController::class, 'index'])->name('management.shifts');
+    // Route::get('/shifts', [ShiftController::class, 'index'])->name('management.shifts');
 
 
 });
