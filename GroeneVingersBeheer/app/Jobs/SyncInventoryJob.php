@@ -31,15 +31,20 @@ class SyncInventoryJob implements ShouldQueue
         if ($response->successful()) {
             $apiData = $response->json();
 
-            // Clear existing products from the database
-            Product::truncate();
+
 
             // Iterate through API data and create new products in the database
+
+            // Iterate through API data
             foreach ($apiData as $item) {
-                Product::create($item);
+                // Check if the item with the same ID already exists in the database
+                $existingItem = Product::where('id', $item['id'])->first();
+
+                // If the item doesn't exist, create it
+                if (!$existingItem) {
+                    Product::create($item);
+                }
             }
-        } else {
-            // Handle API request failure
         }
     }
 }
