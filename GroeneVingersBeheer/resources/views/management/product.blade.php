@@ -21,7 +21,7 @@
                     <td>{{ $product['description'] }}</td>
                     <td>{{ $product['price'] }}</td>
                     <!-- <td>{!! DNS2D::getBarcodeHTML("$product->barcode", 'QRCODE') !!}</td> -->
-                    <td>{!! DNS1D::getBarcodeHTML("$product->barcode", 'PHARMA', 2, 100) !!}</td>
+                    <td>{!! DNS1D::getBarcodeHTML("$product->barcode", 'PHARMA', 2, 100) !!} {{$product['barcode']}}</td>
                     <td><img src="{{ $product['image'] }}" alt="{{ $product['name'] }}" style="max-width: 100px;"></td>
                 </tr>
             </tbody>

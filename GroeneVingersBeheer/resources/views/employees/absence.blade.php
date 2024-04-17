@@ -5,7 +5,7 @@
         <h1 class="mt-5">Absentie melden</h1>
         <form action="{{ route('employee.absence') }}" method="POST">
             @csrf
-            <div class="mb-3" <label for="absence_type">Absence Type:</label>
+            <div class="mb-3" label for="absence_type">Absence Type:</label>
                 <select class="form-control" name="absence_type" id="absence_type">
                     @foreach ($absenceTypes as $type)
                         <option value="{{ $type->id }}">{{ $type->name }}</option>
