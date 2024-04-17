@@ -42,7 +42,6 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::delete('/management/{employee}', [UserdataController::class, 'destroy'])->name('management.destroy');
 
     Route::get('/inventory', [InventoryController::class, 'index'])->name('management.inventory');
-    // Get all products
     Route::get('/product/{id}', [ProductController::class, 'show'])->name('management.product.show');
 
     // Route::get('/shifts', [ShiftController::class, 'index'])->name('management.shifts');

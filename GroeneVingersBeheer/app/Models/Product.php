@@ -16,6 +16,7 @@ class Product extends Model
         'price',
         'image',
         'color',
+        'barcode',
         'height_cm',
         'width_cm',
         'depth_cm',

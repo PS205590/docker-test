@@ -42,7 +42,21 @@ class SyncInventoryJob implements ShouldQueue
 
                 // If the item doesn't exist, create it
                 if (!$existingItem) {
-                    Product::create($item);
+                    // Product::create($item);
+                    $randomNumber = mt_rand(1000000000, 9999999999);
+
+                    Product::create([
+                        'name' => $item['name'],
+                        'description' => $item['description'],
+                        'price' => $item['price'],
+                        'image' => $item['image'],
+                        'color' => $item['color'],
+                        'barcode' => $randomNumber,
+                        'height_cm' => $item['height_cm'],
+                        'width_cm' => $item['width_cm'],
+                        'depth_cm' => $item['depth_cm'],
+                        'weight_gr' => $item['weight_gr'],
+                    ]);
                 }
             }
         }
