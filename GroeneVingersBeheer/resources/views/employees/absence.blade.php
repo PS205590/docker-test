@@ -1,23 +1,29 @@
 @extends('layouts.layout')
 
 @section('content')
-
-    <form action="{{ route('employee.absence') }}" method="POST">
-        @csrf
-        <label for="absence_type">Absence Type:</label>
-        <select name="absence_type" id="absence_type">
-            @foreach($absenceTypes as $type)
-                <option value="{{ $type->id }}">{{ $type->name }}</option>
-            @endforeach
-        </select>
-        <br>
-        <label for="start_time">Start Time:</label>
-        <input type="datetime-local" name="start_time" id="start_time">
-        <br>
-        <label for="finish_time">Finish Time:</label>
-        <input type="datetime-local" name="finish_time" id="finish_time">
-        <br>
-        <button type="submit">Submit</button>
-    </form>
-
+    <div class="container">
+        <h1 class="mt-5">Absentie melden</h1>
+        <form action="{{ route('employee.absence') }}" method="POST">
+            @csrf
+            <div class="mb-3" <label for="absence_type">Absence Type:</label>
+                <select class="form-control" name="absence_type" id="absence_type">
+                    @foreach ($absenceTypes as $type)
+                        <option value="{{ $type->id }}">{{ $type->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <br>
+            <div class="mb-3">
+                <label for="start_time">Start Time:</label>
+                <input class="form-control" type="datetime-local" name="start_time" id="start_time">
+            </div>
+            <br>
+            <div class="mb-3">
+                <label for="finish_time">Finish Time:</label>
+                <input class="form-control" type="datetime-local" name="finish_time" id="finish_time">
+            </div>
+            <br>
+            <button class="btn btn-success" type="submit">Submit</button>
+        </form>
+    </div>
 @endsection
