@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(AppointmentTypeSeeder::class);
         $this->call(ShiftSeeder::class);
-        $this->call(ProductSeeder::class);
+        // $this->call(ProductSeeder::class);
 
         // \App\Models\User::factory(10)->create();
 

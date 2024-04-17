@@ -12,6 +12,7 @@
         "laravel/framework": "^v11.0.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.8",
+        "milon/barcode": "^11.0",
         "postcode-nl/api-client": "^1.0"
     },
     "require-dev": {
