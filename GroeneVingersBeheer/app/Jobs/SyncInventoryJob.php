@@ -46,6 +46,7 @@ class SyncInventoryJob implements ShouldQueue
                     $randomNumber = mt_rand(1000000000, 9999999999);
 
                     Product::create([
+                        'id' => $item['id'],
                         'name' => $item['name'],
                         'description' => $item['description'],
                         'price' => $item['price'],

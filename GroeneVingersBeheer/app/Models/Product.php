@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $primary_id = 'id';
 
     protected $fillable = [
+        'id',
         'name',
         'description',
         'price',
