@@ -9,10 +9,10 @@
             <thead>
             <tr>
                 <th>Product</th>
-                <th>Description</th>
-                <th>Price</th>
+                <th>Beschrijving</th>
+                <th>Prijs</th>
                 <th>Barcode</th>
-                <th>Image</th>
+                <th>Foto</th>
             </tr>
             </thead>
             <tbody>

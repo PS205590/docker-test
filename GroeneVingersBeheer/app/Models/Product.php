@@ -22,7 +22,10 @@ class Product extends Model
         'depth_cm',
         'weight_gr',
     ];
-
+    public function orders()
+    {
+        return $this->hasMany(OrderDetail::class, 'product_id');
+    }
     public function inventory(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Inventory::class);

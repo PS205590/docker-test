@@ -10,6 +10,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Http;
 use App\Models\Product;
 use Illuminate\Support\Facades\Cache;
+use App\Models\Inventory;
 
 class SyncInventoryJob implements ShouldQueue
 {
@@ -58,6 +59,12 @@ class SyncInventoryJob implements ShouldQueue
                         'depth_cm' => $item['depth_cm'],
                         'weight_gr' => $item['weight_gr'],
                     ]);
+
+                    // Create inventory record for the product
+                    Inventory::updateOrCreate(
+                        ['product_id' => $item['id']], // Ensure product_id is provided
+                        ['quantity' => 0] // Set the initial quantity
+                    );
                 }
             }
         }

@@ -52,6 +52,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'users', 'role_id', 'role_id');
     }
 
+    public function orders()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
     public function calendarEvents(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Appointment::class);

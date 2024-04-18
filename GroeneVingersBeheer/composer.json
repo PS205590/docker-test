@@ -6,7 +6,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "arielmejiadev/larapex-charts": "^2.1",
         "barryvdh/laravel-dompdf": "^2.1",
+        "consoletvs/charts": "6.*",
         "dompdf/dompdf": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^v11.0.0",

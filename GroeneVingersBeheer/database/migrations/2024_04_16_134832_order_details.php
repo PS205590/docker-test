@@ -16,14 +16,20 @@ return new class extends Migration
             $table->timestamps();
             $table->integer('user_id');
             $table->decimal('total');
-            $table->integer('payment_id')->unsigned();
+            $table->integer('payment_id')->unsigned()->nullable(); // Make nullable
+            $table->unsignedBigInteger('product_id')->nullable(); // Make nullable
         });
 
-        Schema::table('order_details', function(Blueprint $table) {
+        Schema::table('order_details', function (Blueprint $table) {
             $table->foreign('payment_id')->references('id')->on('payment_details')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreign('product_id')->references('id')->on('products')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
         });
+
+
     }
 
     public function down()

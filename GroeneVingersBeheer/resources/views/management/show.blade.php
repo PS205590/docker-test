@@ -1,50 +1,13 @@
 @extends('layouts.layout')
 
 @section('content')
-    <h1>Product information:</h1>
-
-    <!-- Loading screen -->
-    <div id="loading-screen" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-        <div class="spinner"></div>
-        <p>Loading...</p>
+    <div class="container">
+        <h1>User Details</h1>
+        <ul>
+            <li><strong>Name:</strong> {{ $user->name }}</li>
+            <li><strong>Email:</strong> {{ $user->email }}</li>
+            <li><strong>Role:</strong> {{ $user->role_id }}</li>
+        </ul>
+        <a href="{{ route('management.index') }}" class="btn btn-secondary">Back</a>
     </div>
-
-    <!-- Inventory content (hidden by default) -->
-    <div id="inventory-content" style="display: none;">
-        <table>
-            <thead>
-            <tr>
-                <th>Product</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Image</th>
-                <!-- Add more columns as needed -->
-            </tr>
-            </thead>
-            <tbody>
-            @foreach ($products as $product)
-                <tr>
-                    <td>{{ $product['name'] }}</td>
-                    <td>{{ $product['description'] }}</td>
-                    <td>{{ $product['price'] }}</td>
-                    <td><img src="{{ $product['image'] }}" alt="{{ $product['name'] }}" style="max-width: 100px;"></td>
-                    <!-- Add more columns as needed -->
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-    </div>
-
-    <script>
-        // Display loading screen
-        document.getElementById("loading-screen").style.display = "flex";
-
-        // Simulate delay for demonstration purposes
-        setTimeout(function() {
-            // Hide loading screen
-            document.getElementById("loading-screen").style.display = "none";
-            // Show inventory content
-            document.getElementById("inventory-content").style.display = "block";
-        }, 2000); // Adjust delay time as needed
-    </script>
 @endsection

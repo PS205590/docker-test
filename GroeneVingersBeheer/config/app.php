@@ -169,6 +169,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
     ])->toArray(),
 
     /*

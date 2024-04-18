@@ -4,109 +4,76 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+
 class UserdataController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    public function index()
     {
         $users = User::all();
         return view('management.index', compact('users'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-
-            'id' => 'required|int',
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|max:255',
-            'password' => 'required|string|max:255',
-            'role_id' => 'required|int',
-
-        ]);
-        User::create($request->all());
-        return redirect()->route('management.index')
-            ->with('success', 'Post created successfully.');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(Request $request, User $employee)
-    {
-        $validatedData = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone_number' => 'required|string|max:20',
-            'position' => 'required|string|max:255',
-        ]);
-
-        $employee->update($validatedData);
-
-        return redirect()->route('management.index')->with('success', 'Employee updated successfully.');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function destroy($id)
-    {
-        $users = User::find($id);
-        $users->delete();
-        return redirect()->route('management.index')
-            ->with('success', 'Order deleted successfully');
-    }
-    // routes functions
-
-    /**
-     * Show the form for creating a new post.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
-     */
     public function create()
     {
         return view('management.create');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
-     */
-    public function show($id)
+    public function store(Request $request)
     {
-        $users = User::find($id);
-        return view('management.show', compact('users'));
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6',
+            'role_id' => 'required|integer', // Ensure that the role ID is required and of integer type
+        ]);
+
+        // Create a new user with the provided data
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->role_id = $request->input('role_id'); // Assign the role ID from the form
+
+        // Save the user to the database
+        $user->save();
+
+        // Redirect to the index page with a success message
+        return redirect()->route('management.index')
+            ->with('success', 'User created successfully.');
     }
 
-    /**
-     * Show the form for editing the specified post.
-     *
-     * @param int $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
-     */
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+        return view('management.show', compact('user'));
+    }
+
     public function edit($id)
     {
-        $users = User::find($id);
-        return view('management.edit', compact('users'));
+        $user = User::findOrFail($id);
+        return view('management.edit', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'password' => 'required|string|min:8',
+            'role_id' => 'required|int',
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+
+        return redirect()->route('management.index')->with('success', 'User updated successfully.');
+    }
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('management.index')->with('success', 'User deleted successfully.');
     }
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\SalesController;
 use App\Http\Controllers\ShiftController;
 
 /*
@@ -34,18 +35,26 @@ Route::controller(LoginRegisterController::class)->group(function() {
 
 Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     // Routes accessible only to admins
-    Route::get('/management', [UserdataController::class, 'index'])->name('management.index');
-    Route::post('/management', [UserdataController::class, 'store'])->name('management.store');
-    Route::get('/management/{employee}', [UserdataController::class, 'show'])->name('management.show'); // Define the route to show user data
-    Route::get('/management/{employee}/edit', [UserdataController::class, 'edit'])->name('management.edit');
-    Route::put('/management/{employee}', [UserdataController::class, 'update'])->name('management.update');
-    Route::delete('/management/{employee}', [UserdataController::class, 'destroy'])->name('management.destroy');
 
-    Route::get('/inventory', [InventoryController::class, 'index'])->name('management.inventory');
+    Route::resource('management', UserdataController::class);
+    Route::put('/management/{employee}', [UserdataController::class, 'update'])->name('management.update');
+
+    Route::get('/management', [UserdataController::class, 'index'])->name('management.index');
+    Route::get('/management/create', [UserdataController::class, 'create'])->name('management.create');
+    Route::post('/management', [UserdataController::class, 'store'])->name('management.store');
+    Route::get('/management/{user}', [UserdataController::class, 'show'])->name('management.show');
+    Route::get('/management/{user}/edit', [UserdataController::class, 'edit'])->name('management.edit');
+    Route::put('/management/{user}', [UserdataController::class, 'update'])->name('management.update');
+    Route::delete('/management/{user}', [UserdataController::class, 'destroy'])->name('management.destroy');
+
+
     Route::get('/product/{id}', [ProductController::class, 'show'])->name('management.product.show');
 
+    Route::get('/sales', [SalesController::class, 'index'])->name('management.sales');
     // Route::get('/shifts', [ShiftController::class, 'index'])->name('management.shifts');
-
+    Route::get('/inventory', [InventoryController::class, 'index'])->name('management.inventory');
+    Route::get('/inventory/order', [InventoryController::class, 'orderView'])->name('management.wholesale');
+    Route::post('/inventory/order', [InventoryController::class, 'order'])->name('inventory.order');
 
 });
 

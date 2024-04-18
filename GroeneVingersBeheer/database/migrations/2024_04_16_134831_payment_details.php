@@ -19,12 +19,13 @@ return new class extends Migration
             $table->string('provider');
             $table->string('status');
         });
-
-
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down()
     {
-        Schema::drop('payment_details');
+        Schema::dropIfExists('payment_details');
     }
 };
