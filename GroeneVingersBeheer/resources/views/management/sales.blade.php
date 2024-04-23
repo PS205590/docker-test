@@ -1,5 +1,3 @@
-<!-- sales.blade.php -->
-
 @extends('layouts.layout')
 
 @section('content')
@@ -19,7 +17,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Sales per day chart
+
         var salesPerDayLabels = @json($salesPerDay->pluck('date'));
         var salesPerDayData = @json($salesPerDay->pluck('total_sales'));
 
@@ -39,13 +37,18 @@
             options: {
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value, index, values) {
+                                return value.toLocaleString("nl-NL",{style:"currency", currency:"EUR"});
+                            }
+                        }
                     }
                 }
             }
         });
 
-        // Sales per employee chart
+
         var salesPerEmployeeLabels = @json($salesPerEmployee->pluck('name'));
         var salesPerEmployeeData = @json($salesPerEmployee->pluck('orders_count'));
 
@@ -81,7 +84,7 @@
         .flex {
             display: flex;
         }
-        .w-1/2 {
+        .w-2 {
             flex: 0 0 50%;
             max-width: 50%;
         }

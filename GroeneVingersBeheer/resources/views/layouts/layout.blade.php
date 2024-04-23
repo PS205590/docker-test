@@ -25,16 +25,16 @@
 @include('partials.navbar')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2 p-0"> <!-- Add p-0 class to remove default padding -->
-            <!-- Include the sidebar component -->
+        <div class="col-md-2 p-0">
+
             @include('partials.sidebar')
         </div>
         <div class="col-md-9">
-            <!-- Page Content -->
+
             <div class="container">
                 @yield('content')
             </div>
-            <!-- /Page Content -->
+
         </div>
     </div>
 </div>

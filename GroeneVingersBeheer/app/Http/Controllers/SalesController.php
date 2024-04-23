@@ -42,17 +42,17 @@ class SalesController extends Controller
 
         // Retrieve sales data based on the specified period
         if ($period === 'day') {
-            // Example: Retrieve sales per day
+
             $salesData = OrderDetail::selectRaw('DATE(created_at) as date, SUM(total) as total_sales')
                 ->groupBy('date')
                 ->get();
         } elseif ($period === 'month') {
-            // Example: Retrieve sales per month
+
             $salesData = OrderDetail::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(total) as total_sales')
                 ->groupBy('year', 'month')
                 ->get();
         } elseif ($period === 'year') {
-            // Example: Retrieve sales per year
+
             $salesData = OrderDetail::selectRaw('YEAR(created_at) as year, SUM(total) as total_sales')
                 ->groupBy('year')
                 ->get();

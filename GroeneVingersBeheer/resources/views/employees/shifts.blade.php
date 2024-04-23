@@ -5,7 +5,7 @@
     <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.css" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.css" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid/main.css" rel="stylesheet"/>
-    <script src='fullcalendar/dist/index.global.js'></script>
+
 @endpush
 
 @section('content')
@@ -21,11 +21,17 @@
                         slotMinTime: '9:00:00',
                         slotMaxTime: '20:00:00',
                         themeSystem: 'bootstrap5',
-
-
+                        timeZone: 'CEST',
+                        allDaySlot: false,
+                        locale: 'nl',
                         events: @json($data),
+
                     });
                     calendar.render();
+                });
+
+                $(function() {
+
                 });
             </script>
         @endpush

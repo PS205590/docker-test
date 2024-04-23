@@ -1,4 +1,4 @@
-<div class="bg-dark" id="sidebar" style="height: 100vh;"> <!-- Change background color to dark -->
+<div class="bg-dark" id="sidebar" style="height: 100vh;">
     <div class="sidebar-heading"></div>
     <ul class="list-group" >
 

@@ -34,7 +34,7 @@ Route::controller(LoginRegisterController::class)->group(function() {
 });
 
 Route::middleware(['auth', AdminMiddleware::class])->group(function () {
-    // Routes accessible only to admins
+
 
     Route::resource('management', UserdataController::class);
     Route::put('/management/{employee}', [UserdataController::class, 'update'])->name('management.update');

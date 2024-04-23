@@ -3,13 +3,13 @@
 @section('content')
     <h1>Inventaris</h1>
 
-    <!-- Loading screen -->
+
     <div id="loading-screen" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
         <div class="spinner"></div>
         <p>Loading...</p>
     </div>
 
-    <!-- Inventory content (hidden by default) -->
+
     <div id="inventory-content" style="display: none;">
         <table>
             <thead>
@@ -34,15 +34,15 @@
     </div>
 
     <script>
-        // Display loading screen
+
         document.getElementById("loading-screen").style.display = "flex";
 
-        // Simulate delay for demonstration purposes
+
         setTimeout(function() {
-            // Hide loading screen
+
             document.getElementById("loading-screen").style.display = "none";
-            // Show inventory content
+
             document.getElementById("inventory-content").style.display = "block";
-        }, 2000); // Adjust delay time as needed
+        }, 2000);
     </script>
 @endsection

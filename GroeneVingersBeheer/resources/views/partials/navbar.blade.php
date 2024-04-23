@@ -2,7 +2,7 @@
     <div class="container">
         <a class="navbar-brand" href="{{ URL('/') }}">
             <img src="{{ asset('../images/LogoGV.png') }}" alt="Logo" height="30">
-            <!-- You can adjust the height and width of the logo as needed -->
+
             GroeneVinger
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">

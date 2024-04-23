@@ -15,12 +15,11 @@ class EmployeeMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // Check if the authenticated user is an admin
+
         if ($request->user() && $request->user()->role_id === 2) {
             return $next($request);
         }
 
-        // If not an admin, redirect to login or handle unauthorized access
-        return redirect('/'); // or any other response, such as abort(403)
+        return redirect('/');
     }
 }

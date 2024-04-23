@@ -9,7 +9,7 @@
 </head>
 <body>
 
-@include('partials.navbar') <!-- Include the navbar component -->
+@include('partials.navbar')
 
 <div class="container">
     @yield('content')

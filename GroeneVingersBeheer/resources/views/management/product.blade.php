@@ -3,7 +3,7 @@
 @section('content')
     <h1>Product information</h1>
 
-    <!-- Product content (hidden by default) -->
+
     <div id="product-content">
         <table>
             <thead>

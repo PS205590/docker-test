@@ -13,10 +13,10 @@ class Inventory extends Model
         'quantity',
     ];
     protected $attributes = [
-        'quantity' => 0, // Specify default value for quantity attribute
+        'quantity' => 0,
     ];
 
-    // Define relationship with Product
+
     public function product()
     {
         return $this->belongsTo(Product::class);

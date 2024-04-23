@@ -18,13 +18,12 @@ class SyncInventoryJob implements ShouldQueue
 
     public function handle()
     {
-        // Define your API endpoint
+
         $apiEndpoint = 'https://kuin.summaict.nl/api/product';
 
-        // Define your bearer token
+
         $bearerToken = 'Bearer 75|oxURV36dYHnbyy3f94vb70qPmCwY4OLimqyjorTh';
 
-        // Make the HTTP request with bearer token included in headers
         $response = Http::withHeaders([
             'Authorization' => $bearerToken,
         ])->get($apiEndpoint);
@@ -32,18 +31,13 @@ class SyncInventoryJob implements ShouldQueue
         if ($response->successful()) {
             $apiData = $response->json();
 
-
-
-            // Iterate through API data and create new products in the database
-
-            // Iterate through API data
             foreach ($apiData as $item) {
-                // Check if the item with the same ID already exists in the database
+
                 $existingItem = Product::where('id', $item['id'])->first();
 
-                // If the item doesn't exist, create it
+
                 if (!$existingItem) {
-                    // Product::create($item);
+
                     $randomNumber = mt_rand(1000000000, 9999999999);
 
                     Product::create([
@@ -60,10 +54,9 @@ class SyncInventoryJob implements ShouldQueue
                         'weight_gr' => $item['weight_gr'],
                     ]);
 
-                    // Create inventory record for the product
                     Inventory::updateOrCreate(
-                        ['product_id' => $item['id']], // Ensure product_id is provided
-                        ['quantity' => 0] // Set the initial quantity
+                        ['product_id' => $item['id']],
+                        ['quantity' => 0]
                     );
                 }
             }
