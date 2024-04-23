@@ -20,7 +20,7 @@
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->role_id }}</td>
+                    <td>{{ $user->role->name }}</td>
                     <td>
                         <a href="{{ route('management.show', $user->id) }}" class="btn btn-info btn-sm">Inzien</a>
                         <a href="{{ route('management.edit', $user->id) }}" class="btn btn-primary btn-sm">Wijzigen</a>

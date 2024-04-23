@@ -52,6 +52,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'users', 'role_id', 'role_id');
     }
 
+    // Added the functionality to change the role_id to a name
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
     public function orders()
     {
         return $this->hasMany(OrderDetail::class);

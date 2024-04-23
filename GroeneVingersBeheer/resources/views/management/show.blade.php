@@ -6,7 +6,7 @@
         <ul>
             <li><strong>Name:</strong> {{ $user->name }}</li>
             <li><strong>Email:</strong> {{ $user->email }}</li>
-            <li><strong>Role:</strong> {{ $user->role_id }}</li>
+            <li><strong>Role:</strong> {{ $user->role->name }}</li>
         </ul>
         <a href="{{ route('management.index') }}" class="btn btn-secondary">Back</a>
     </div>
