@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class UserdataController extends Controller
 
     public function create()
     {
-        return view('management.create');
+        $roleType = Role::all();
+        return view('management.create', compact('roleType'));
     }
 
     public function store(Request $request)
@@ -40,6 +42,8 @@ class UserdataController extends Controller
         // Redirect to the index page with a success message
         return redirect()->route('management.index')
             ->with('success', 'User created successfully.');
+
+            dd($user);
     }
 
     public function show($id)
