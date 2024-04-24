@@ -1,4 +1,4 @@
-<div class="bg-dark" id="sidebar" style="height: 100vh;">
+<div class="bg-dark sticky-top pl-0 pt-5;" id="sidebar" style="min-height: 100dvh;">
     <div class="sidebar-heading"></div>
     <ul class="list-group" >
 

@@ -1,30 +1,29 @@
 @extends('layouts.layout')
 
 @section('content')
-    <h1>Product information</h1>
-
-
-    <div id="product-content">
-        <table>
-            <thead>
-            <tr>
-                <th>Product</th>
-                <th>Beschrijving</th>
-                <th>Prijs</th>
-                <th>Barcode</th>
-                <th>Foto</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ $product['name'] }}</td>
-                    <td>{{ $product['description'] }}</td>
-                    <td>{{ $product['price'] }}</td>
-                    <!-- <td>{!! DNS2D::getBarcodeHTML("$product->barcode", 'QRCODE') !!}</td> -->
-                    <td>{!! DNS1D::getBarcodeHTML("$product->barcode", 'PHARMA', 2, 100) !!} {{$product['barcode']}}</td>
-                    <td><img src="{{ $product['image'] }}" alt="{{ $product['name'] }}" style="max-width: 100px;"></td>
-                </tr>
-            </tbody>
-        </table>
+    <h1 class="mt-4">Product information</h1>
+    
+    <div class="product-content border rounded p-4">
+        <div class="row mb-3">
+            <div class="col-md-3 font-weight-bold">Product:</div>
+            <div class="col-md-9">{{ $product['name'] }}</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-3 font-weight-bold">Foto:</div>
+            <div class="col-md-9"><img src="{{ $product['image'] }}" alt="{{ $product['name'] }}" class="img-fluid" style="max-width: 100px;"></div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-3 font-weight-bold">Beschrijving:</div>
+            <div class="col-md-9">{{ $product['description'] }}</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-3 font-weight-bold">Prijs:</div>
+            <div class="col-md-9">{{ $product['price'] }}</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-3 font-weight-bold">Barcode:</div>
+            <div class="col-md-9">{!! DNS1D::getBarcodeHTML("$product->barcode", 'PHARMA', 2, 100) !!} {{$product['barcode']}}</div>
+        </div>
     </div>
+
 @endsection
