@@ -47,99 +47,112 @@
 @section('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-    const addProductBtn = document.getElementById('addProduct');
-    const selectedProductsList = document.getElementById('selectedProducts');
-    const selectedProductsInput = document.getElementById('selectedProductsInput');
-    const productMap = {}; // Map to track product quantities
+            const addProductBtn = document.getElementById('addProduct');
+            const selectedProductsList = document.getElementById('selectedProducts');
+            const selectedProductsInput = document.getElementById('selectedProductsInput');
+            const productMap = {}; // Map to track product quantities
 
-    addProductBtn.addEventListener('click', function() {
-        const productId = document.getElementById('product').value;
-        const productName = document.getElementById('product').options[document.getElementById('product').selectedIndex].text;
+            addProductBtn.addEventListener('click', function() {
+                const productId = document.getElementById('product').value;
+                const productName = document.getElementById('product').options[document.getElementById(
+                    'product').selectedIndex].text;
 
-        if (productMap[productId]) {
-            // If the product already exists, increase its quantity
-            productMap[productId]++;
-            updateProductListItem(productId, productMap[productId]);
-        } else {
-            // If the product is added for the first time, initialize its quantity to 1
-            productMap[productId] = 1;
-            createProductListItem(productId, productName, productMap[productId]);
-        }
+                if (productMap[productId]) {
+                    // If the product already exists, increase its quantity
+                    productMap[productId]++;
+                    updateProductListItem(productId, productMap[productId]);
+                } else {
+                    // If the product is added for the first time, initialize its quantity to 1
+                    productMap[productId] = 1;
+                    createProductListItem(productId, productName, productMap[productId]);
+                }
 
-        updateSelectedProductsInput();
-    });
-
-    function createProductListItem(productId, productName, quantity) {
-        const listItem = document.createElement('li');
-        listItem.textContent = productName;
-        listItem.className = 'list-group-item';
-
-        const quantitySpan = document.createElement('span');
-        quantitySpan.textContent = ' ' + quantity + '';
-        listItem.appendChild(quantitySpan);
-
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
-        deleteButton.className = 'btn btn-danger btn-sm ms-2';
-        deleteButton.onclick = function() {
-            listItem.remove();
-            productMap[productId]--;
-            if (productMap[productId] === 0) {
-                delete productMap[productId];
-            }
-            updateSelectedProductsInput();
-        };
-        listItem.appendChild(deleteButton);
-
-        selectedProductsList.appendChild(listItem);
-
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'products[]';
-        input.value = productId;
-        listItem.appendChild(input);
-    }
-
-    function updateProductListItem(productId, quantity) {
-        const listItem = Array.from(selectedProductsList.children).find(item => item.querySelector('input').value === productId);
-        if (listItem) {
-            const quantitySpan = listItem.querySelector('span');
-            if (quantitySpan) {
-                quantitySpan.textContent = ' ' + quantity + '';
-            }
-        }
-    }
-
-    function updateSelectedProductsInput() {
-        const selectedProductInputs = selectedProductsList.querySelectorAll('input');
-        const selectedProductIds = Array.from(selectedProductInputs).map(input => input.value);
-        selectedProductsInput.value = JSON.stringify(selectedProductIds);
-    }
-
-    document.getElementById('lookupAddress').addEventListener('click', function() {
-        const postcode = document.getElementById('postcode').value;
-        const houseNumber = document.getElementById('house_number').value;
-
-        getAddressFromPostcodeAndHouse(postcode, houseNumber);
-    });
-
-    function getAddressFromPostcodeAndHouse(postcode, houseNumber) {
-        const apiKey = 'ArGkRG9i9A8WjC2G2_BZybftt-RZu6YpQnQbEPX50vg6amY5I1uRsZoMlkEyZX5P';
-        const url = `https://dev.virtualearth.net/REST/v1/Locations?postalCode=${postcode}&addressLine=${houseNumber}&key=${apiKey}`;
-
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                const address = data.resourceSets[0].resources[0].address;
-                const fullAddress = `${address.addressLine}, ${address.locality}, ${address.adminDistrict}, ${address.countryRegion}`;
-                console.log('Full Address:', fullAddress);
-                document.getElementById('address').value = fullAddress;
-            })
-            .catch(error => {
-                console.error('Error fetching address:', error);
+                updateSelectedProductsInput();
             });
-    }
-});
 
+            function createProductListItem(productId, productName, quantity) {
+                const listItem = document.createElement('li');
+                listItem.textContent = productName;
+                listItem.className = 'list-group-item';
+
+                const quantitySpan = document.createElement('span');
+                quantitySpan.textContent = ' ' + quantity + '';
+                listItem.appendChild(quantitySpan);
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.className = 'btn btn-danger btn-sm ms-2';
+                deleteButton.onclick = function() {
+                    listItem.remove();
+                    productMap[productId]--;
+                    if (productMap[productId] === 0) {
+                        delete productMap[productId];
+                    }
+                    updateSelectedProductsInput();
+                };
+                listItem.appendChild(deleteButton);
+
+                selectedProductsList.appendChild(listItem);
+
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'products[]';
+                input.value = productId;
+                listItem.appendChild(input);
+            }
+
+            function updateProductListItem(productId, quantity) {
+                const listItem = Array.from(selectedProductsList.children).find(item => item.querySelector('input')
+                    .value === productId);
+                if (listItem) {
+                    const quantitySpan = listItem.querySelector('span');
+                    if (quantitySpan) {
+                        quantitySpan.textContent = ' ' + quantity + '';
+                    }
+                }
+            }
+
+            function updateSelectedProductsInput() {
+                const selectedProductInputs = selectedProductsList.querySelectorAll('input');
+                const selectedProductData = Array.from(selectedProductInputs).map(input => {
+                    const productId = input.value;
+                    const quantity = productMap[productId] || 1; // Default quantity to 1 if not found
+                    return {
+                        id: productId,
+                        quantity: quantity
+                    };
+                });
+                selectedProductsInput.value = JSON.stringify(selectedProductData);
+            }
+
+
+
+
+            document.getElementById('lookupAddress').addEventListener('click', function() {
+                const postcode = document.getElementById('postcode').value;
+                const houseNumber = document.getElementById('house_number').value;
+
+                getAddressFromPostcodeAndHouse(postcode, houseNumber);
+            });
+
+            function getAddressFromPostcodeAndHouse(postcode, houseNumber) {
+                const apiKey = 'ArGkRG9i9A8WjC2G2_BZybftt-RZu6YpQnQbEPX50vg6amY5I1uRsZoMlkEyZX5P';
+                const url =
+                    `https://dev.virtualearth.net/REST/v1/Locations?postalCode=${postcode}&addressLine=${houseNumber}&key=${apiKey}`;
+
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        const address = data.resourceSets[0].resources[0].address;
+                        const fullAddress =
+                            `${address.addressLine}, ${address.locality}, ${address.adminDistrict}, ${address.countryRegion}`;
+                        console.log('Full Address:', fullAddress);
+                        document.getElementById('address').value = fullAddress;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching address:', error);
+                    });
+            }
+        });
     </script>
 @endsection
