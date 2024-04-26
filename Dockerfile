@@ -1,4 +1,4 @@
-#example
+#example for docker
 FROM php8.3
 
 RUN apt-get update -y && apt-get install -y openssl zip unzip git
